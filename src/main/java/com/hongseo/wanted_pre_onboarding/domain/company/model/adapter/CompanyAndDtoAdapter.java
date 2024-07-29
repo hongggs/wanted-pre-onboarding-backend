@@ -20,6 +20,7 @@ public class CompanyAndDtoAdapter {
                 .companyName(company.getCompanyName())
                 .country(company.getCountry())
                 .region(company.getRegion())
+                .createdAt(company.getCreatedAt())
                 .build();
     }
 }
