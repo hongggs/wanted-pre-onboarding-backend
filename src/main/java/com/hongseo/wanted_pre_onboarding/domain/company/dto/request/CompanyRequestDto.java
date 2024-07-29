@@ -7,9 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CompanyRequestDto {
     @NotBlank(message = "회사명을 작성해주세요.")
     private String companyName;

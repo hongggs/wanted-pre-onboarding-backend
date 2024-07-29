@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
+@NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CompanyResponseDto{
     private Long companyId;
     private String companyName;
