@@ -2,7 +2,7 @@ package com.hongseo.wanted_pre_onboarding.domain.company.service;
 
 import com.hongseo.wanted_pre_onboarding.domain.company.dto.request.CompanyRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.company.dto.response.CompanyResponseDto;
-import com.hongseo.wanted_pre_onboarding.domain.company.exception.CompanyNotFoundException;
+import com.hongseo.wanted_pre_onboarding.domain.company.error.exception.CompanyNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.adapter.CompanyAndDtoAdapter;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;

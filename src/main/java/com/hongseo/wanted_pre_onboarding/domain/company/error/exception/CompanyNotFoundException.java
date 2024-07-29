@@ -1,4 +1,4 @@
-package com.hongseo.wanted_pre_onboarding.domain.company.exception;
+package com.hongseo.wanted_pre_onboarding.domain.company.error.exception;
 
 import com.hongseo.wanted_pre_onboarding.global.error.errorcode.ErrorCode;
 import com.hongseo.wanted_pre_onboarding.global.error.exception.RestApiException;
