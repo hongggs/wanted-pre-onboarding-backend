@@ -1,14 +1,14 @@
 package com.hongseo.wanted_pre_onboarding.domain.jobposting.model.adapter;
 
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
-import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 
 public class JobPostingAndDtoAdapter {
 
-    public static JobPosting dtoToEntity(Company company, JobPostingRequestDto jobPostingDto) {
+    public static JobPosting dtoToEntity(Company company, JobPostingCreateRequestDto jobPostingDto) {
         return JobPosting.builder()
                 .company(company)
                 .position(jobPostingDto.getPosition())

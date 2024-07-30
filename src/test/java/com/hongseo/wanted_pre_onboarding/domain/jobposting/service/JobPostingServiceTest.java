@@ -8,9 +8,8 @@ import static org.mockito.Mockito.when;
 import com.hongseo.wanted_pre_onboarding.domain.company.error.exception.CompanyNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
-import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
-import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.error.exception.JobPostingNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.repository.JobPostingRepository;
@@ -39,7 +38,7 @@ class JobPostingServiceTest {
     void createJobPosting_ShouldReturnJobPostingId() {
         //Given
         Company company = new Company(1L, "네입어", "대한민국", "판교");
-        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
+        JobPostingCreateRequestDto dto = new JobPostingCreateRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
         when(companyRepository.findById(any(Long.class))).thenReturn(java.util.Optional.of(company));
         when(jobPostingRepository.save(any(JobPosting.class))).thenReturn(new JobPosting(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot", company));
 
@@ -55,7 +54,7 @@ class JobPostingServiceTest {
     @DisplayName("존재하지 않는 회사 ID에 대한 채용 공고 등록 시 예외 발생")
     void createJobPosting_WithNonexistentCompanyId() {
         //Given
-        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
+        JobPostingCreateRequestDto dto = new JobPostingCreateRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
 
         when(companyRepository.findById(any(Long.class))).thenReturn(java.util.Optional.empty());
 

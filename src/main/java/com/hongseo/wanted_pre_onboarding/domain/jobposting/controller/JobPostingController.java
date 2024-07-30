@@ -1,6 +1,6 @@
 package com.hongseo.wanted_pre_onboarding.domain.jobposting.controller;
 
-import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.service.JobPostingService;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ public class JobPostingController {
     private JobPostingService jobPostingService;
 
     @PostMapping
-    public ResponseEntity<?> createJobPosting(@Valid @RequestBody JobPostingRequestDto jobPostingDto) {
+    public ResponseEntity<?> createJobPosting(@Valid @RequestBody JobPostingCreateRequestDto jobPostingDto) {
         return new ResponseEntity<>(jobPostingService.createJobPosting(jobPostingDto), HttpStatus.CREATED);
     }
 

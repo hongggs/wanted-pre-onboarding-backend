@@ -2,7 +2,7 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.service.JobPostingService;
@@ -41,8 +41,8 @@ class JobPostingControllerTest {
     @DisplayName("채용 공고 정상 등록")
     void createJobPosting_ReturnsCreated() throws Exception {
         //Given
-        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
-        when(jobPostingService.createJobPosting(any(JobPostingRequestDto.class))).thenReturn(1L);
+        JobPostingCreateRequestDto dto = new JobPostingCreateRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
+        when(jobPostingService.createJobPosting(any(JobPostingCreateRequestDto.class))).thenReturn(1L);
 
         //When, Then
         mockMvc.perform(post("/api/job-posting")
@@ -56,7 +56,7 @@ class JobPostingControllerTest {
     @DisplayName("채용 공고에 position에 null 값 설정 시 예외 발생")
     void createJobPosting_WhenParamsAreInvalid_Null() throws Exception {
         //Given
-        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "", 100000, "성실한 프론트엔드 개발자 뽑습니다.", "React");
+        JobPostingCreateRequestDto dto = new JobPostingCreateRequestDto(1L, "", 100000, "성실한 프론트엔드 개발자 뽑습니다.", "React");
 
         //When, Then
         mockMvc.perform(post("/api/job-posting")
@@ -69,7 +69,7 @@ class JobPostingControllerTest {
     @DisplayName("채용 공고에 reward에 0이하의 값 설정 시 예외 발생")
     void createJobPosting_WhenParamsAreInvalid_Min() throws Exception {
         // Given
-        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "", 100000, "성실한 프론트엔드 개발자 뽑습니다.", "React");
+        JobPostingCreateRequestDto dto = new JobPostingCreateRequestDto(1L, "", 100000, "성실한 프론트엔드 개발자 뽑습니다.", "React");
 
         //When, Then
         mockMvc.perform(post("/api/job-posting")
@@ -81,7 +81,7 @@ class JobPostingControllerTest {
     @Test
     @DisplayName("채용 공고 정상 수정")
     void updateJobPosting_ReturnsUpdatedJobPosting() throws Exception {
-        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "백엔드 개발자", 500000, "경험 많은 백엔드 개발자를 찾습니다.", "Java, Spring Boot");
+        JobPostingCreateRequestDto dto = new JobPostingCreateRequestDto(1L, "백엔드 개발자", 500000, "경험 많은 백엔드 개발자를 찾습니다.", "Java, Spring Boot");
         when(jobPostingService.updateJobPosting(any(Long.class), any(JobPostingUpdateRequestDto.class)))
                 .thenReturn(new JobPostingUpdateResponseDto(1L, "백엔드 개발자", 500000, "경험 많은 백엔드 개발자를 찾습니다.", "Java, Spring Boot"));
 

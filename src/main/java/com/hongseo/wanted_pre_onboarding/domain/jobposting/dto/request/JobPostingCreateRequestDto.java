@@ -8,13 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class JobPostingRequestDto {
+public class JobPostingCreateRequestDto {
     @NotNull(message = "회사번호를 작성해주세요.")
     private Long companyId;
     @NotBlank(message = "채용포지션을 작성해주세요.")

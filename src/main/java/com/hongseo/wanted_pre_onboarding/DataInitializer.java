@@ -1,11 +1,7 @@
 package com.hongseo.wanted_pre_onboarding;
 
 import com.hongseo.wanted_pre_onboarding.domain.company.dto.request.CompanyRequestDto;
-import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
-import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
 import com.hongseo.wanted_pre_onboarding.domain.company.service.CompanyService;
-import com.hongseo.wanted_pre_onboarding.domain.company.service.CompanyServiceImpl;
-import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.service.JobPostingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
