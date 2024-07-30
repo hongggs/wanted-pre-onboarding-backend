@@ -53,7 +53,7 @@ public class JobPostingController {
         return new ResponseEntity<>(jobPostingService.searchJobPostingsByKeyword(keyword), HttpStatus.OK);
     }
 
-    @GetMapping("/{jobPostingId}/")
+    @GetMapping("/{jobPostingId}")
     public JobPostingReadDetailResponseDto getJobPostingDetails(@PathVariable Long jobPostingId) {
         return jobPostingService.getJobPostingDetail(jobPostingId);
     }
