@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,5 +29,11 @@ public class JobPostingController {
     @PutMapping("/{jobPostingId}")
     public ResponseEntity<?> updateJobPosting(@PathVariable Long jobPostingId, @Valid @RequestBody JobPostingUpdateRequestDto jobPostingDto) {
         return new ResponseEntity<>(jobPostingService.updateJobPosting(jobPostingId, jobPostingDto), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{jobPostingId}")
+    public ResponseEntity<?> deleteJobPosting(@PathVariable Long jobPostingId) {
+        jobPostingService.deleteJobPosting(jobPostingId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

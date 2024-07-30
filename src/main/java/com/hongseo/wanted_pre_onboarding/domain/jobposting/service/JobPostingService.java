@@ -9,4 +9,6 @@ import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 public interface JobPostingService {
     public Long createJobPosting(JobPostingRequestDto jobPostingDto);
     public JobPostingUpdateResponseDto updateJobPosting(Long id, JobPostingUpdateRequestDto jobPostingDto);
+
+    public void deleteJobPosting(Long jobPostingId);
 }

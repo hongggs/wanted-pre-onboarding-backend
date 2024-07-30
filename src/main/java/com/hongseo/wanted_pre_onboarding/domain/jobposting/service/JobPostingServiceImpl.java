@@ -43,4 +43,14 @@ public class JobPostingServiceImpl implements JobPostingService{
 
         return JobPostingAndDtoAdapter.entityToUpdateDto(save);
     }
+
+    @Override
+    @Transactional
+    public void deleteJobPosting(Long jobPostingId) {
+        JobPosting jobPosting = jobPostingRepository.findById(jobPostingId)
+                .orElseThrow(JobPostingNotFoundException::new);
+        jobPostingRepository.deleteById(jobPostingId);
+    }
+
+
 }
