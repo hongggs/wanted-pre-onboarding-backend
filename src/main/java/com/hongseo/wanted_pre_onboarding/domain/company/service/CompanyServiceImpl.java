@@ -9,6 +9,7 @@ import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyReposi
 import com.hongseo.wanted_pre_onboarding.global.error.errorcode.CommonErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -17,6 +18,7 @@ public class CompanyServiceImpl implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
+    @Transactional
     public CompanyResponseDto createCompany(CompanyRequestDto companyDto) {
         Company company = CompanyAndDtoAdapter.dtoToEntity(companyDto);
         Company savedCompany = companyRepository.save(company);
@@ -26,7 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyResponseDto readCompany(Long companyId) {
         Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new CompanyNotFoundException(CommonErrorCode.RESOURCE_NOT_FOUND));
+                .orElseThrow(CompanyNotFoundException::new);
 
         return CompanyAndDtoAdapter.entityToDto(company);
     }

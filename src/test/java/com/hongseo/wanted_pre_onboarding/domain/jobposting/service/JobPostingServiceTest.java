@@ -5,10 +5,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.hongseo.wanted_pre_onboarding.domain.company.exception.CompanyNotFoundException;
+import com.hongseo.wanted_pre_onboarding.domain.company.error.exception.CompanyNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.error.exception.JobPostingNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.repository.JobPostingRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,6 +62,19 @@ class JobPostingServiceTest {
         //When, Then
         assertThrows(CompanyNotFoundException.class, () -> {
             jobPostingService.createJobPosting(dto);
+        });
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 채용공고 ID에 대한 채용 공고 수정 시 예외 발생")
+    void updateJobPosting_WithNonexistentJobPostingId() {
+        //Given
+        JobPostingUpdateRequestDto dto = new JobPostingUpdateRequestDto("백엔드 개발자", 500000, "경험 많은 백엔드 개발자를 찾습니다.", "Java, Spring Boot");
+        when(jobPostingRepository.findById(any(Long.class))).thenReturn(java.util.Optional.empty());
+
+        //When, Then
+        assertThrows(JobPostingNotFoundException.class, () -> {
+            jobPostingService.updateJobPosting(1L, dto);
         });
     }
 }

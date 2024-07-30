@@ -3,6 +3,8 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.service.JobPostingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -74,5 +76,18 @@ class JobPostingControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("채용 공고 정상 수정")
+    void updateJobPosting_ReturnsUpdatedJobPosting() throws Exception {
+        JobPostingRequestDto dto = new JobPostingRequestDto(1L, "백엔드 개발자", 500000, "경험 많은 백엔드 개발자를 찾습니다.", "Java, Spring Boot");
+        when(jobPostingService.updateJobPosting(any(Long.class), any(JobPostingUpdateRequestDto.class)))
+                .thenReturn(new JobPostingUpdateResponseDto(1L, "백엔드 개발자", 500000, "경험 많은 백엔드 개발자를 찾습니다.", "Java, Spring Boot"));
+
+        mockMvc.perform(put("/api/job-posting/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isOk());
     }
 }
