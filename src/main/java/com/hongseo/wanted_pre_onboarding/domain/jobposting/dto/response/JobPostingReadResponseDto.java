@@ -16,7 +16,6 @@ public class JobPostingReadResponseDto {
     private String region;
     private String position;
     private Integer reward;
-    private String description;
     private String skill;
     private LocalDateTime createdAt;
 }

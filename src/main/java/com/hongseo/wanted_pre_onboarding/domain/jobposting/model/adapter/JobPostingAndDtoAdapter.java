@@ -49,7 +49,6 @@ public class JobPostingAndDtoAdapter {
                 .region(jobPosting.getCompany().getRegion())
                 .position(jobPosting.getPosition())
                 .reward(jobPosting.getReward())
-                .description(jobPosting.getDescription())
                 .skill(jobPosting.getSkill())
                 .createdAt(jobPosting.getCreatedAt())
                 .build();
