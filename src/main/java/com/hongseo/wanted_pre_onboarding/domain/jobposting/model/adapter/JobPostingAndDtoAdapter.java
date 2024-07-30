@@ -3,6 +3,7 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting.model.adapter;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 
@@ -37,6 +38,20 @@ public class JobPostingAndDtoAdapter {
                 .reward(jobPosting.getReward())
                 .description(jobPosting.getDescription())
                 .skill(jobPosting.getSkill())
+                .build();
+    }
+
+    public static JobPostingReadResponseDto entityToReadDto(JobPosting jobPosting) {
+        return JobPostingReadResponseDto.builder()
+                .jobPostingId(jobPosting.getJobPostingId())
+                .companyName(jobPosting.getCompany().getCompanyName())
+                .country(jobPosting.getCompany().getCountry())
+                .region(jobPosting.getCompany().getRegion())
+                .position(jobPosting.getPosition())
+                .reward(jobPosting.getReward())
+                .description(jobPosting.getDescription())
+                .skill(jobPosting.getSkill())
+                .createdAt(jobPosting.getCreatedAt())
                 .build();
     }
 }

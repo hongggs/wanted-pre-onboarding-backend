@@ -1,5 +1,6 @@
 package com.hongseo.wanted_pre_onboarding.domain.jobposting.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.global.base.BaseTimeEntity;
 import jakarta.persistence.Entity;

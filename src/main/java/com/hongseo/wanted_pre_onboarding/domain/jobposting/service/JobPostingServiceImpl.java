@@ -5,11 +5,14 @@ import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.error.exception.JobPostingNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.adapter.JobPostingAndDtoAdapter;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.repository.JobPostingRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +54,19 @@ public class JobPostingServiceImpl implements JobPostingService{
         jobPostingRepository.deleteById(jobPostingId);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<JobPostingReadResponseDto> getAllJobPostings() {
+        return jobPostingRepository.findAllWithCompany().stream()
+                .map(JobPostingAndDtoAdapter::entityToReadDto)
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<JobPostingReadResponseDto> searchJobPostingsByKeyword(String keyword) {
+        return jobPostingRepository.findByKeyword(keyword).stream()
+                .map(JobPostingAndDtoAdapter::entityToReadDto)
+                .collect(Collectors.toList());
+    }
 }
