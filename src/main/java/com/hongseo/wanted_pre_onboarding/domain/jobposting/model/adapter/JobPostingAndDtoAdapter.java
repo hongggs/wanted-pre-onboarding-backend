@@ -3,9 +3,11 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting.model.adapter;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadDetailResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
+import java.util.List;
 
 public class JobPostingAndDtoAdapter {
 
@@ -50,6 +52,21 @@ public class JobPostingAndDtoAdapter {
                 .position(jobPosting.getPosition())
                 .reward(jobPosting.getReward())
                 .skill(jobPosting.getSkill())
+                .createdAt(jobPosting.getCreatedAt())
+                .build();
+    }
+
+    public static JobPostingReadDetailResponseDto entityToReadDetailDto(List<Long> otherJobPostings, JobPosting jobPosting) {
+        return JobPostingReadDetailResponseDto.builder()
+                .jobPostingId(jobPosting.getJobPostingId())
+                .companyName(jobPosting.getCompany().getCompanyName())
+                .country(jobPosting.getCompany().getCountry())
+                .region(jobPosting.getCompany().getRegion())
+                .position(jobPosting.getPosition())
+                .reward(jobPosting.getReward())
+                .description(jobPosting.getDescription())
+                .skill(jobPosting.getSkill())
+                .otherJobPostings(otherJobPostings)
                 .createdAt(jobPosting.getCreatedAt())
                 .build();
     }

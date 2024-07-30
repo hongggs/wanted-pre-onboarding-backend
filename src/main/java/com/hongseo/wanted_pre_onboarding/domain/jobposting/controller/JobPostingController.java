@@ -2,6 +2,7 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting.controller;
 
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadDetailResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.service.JobPostingService;
 import jakarta.validation.Valid;
@@ -50,5 +51,10 @@ public class JobPostingController {
     @GetMapping("/search")
     public ResponseEntity<List<JobPostingReadResponseDto>> searchJobPostings(@RequestParam String keyword) {
         return new ResponseEntity<>(jobPostingService.searchJobPostingsByKeyword(keyword), HttpStatus.OK);
+    }
+
+    @GetMapping("/{jobPostingId}/")
+    public JobPostingReadDetailResponseDto getJobPostingDetails(@PathVariable Long jobPostingId) {
+        return jobPostingService.getJobPostingDetail(jobPostingId);
     }
 }

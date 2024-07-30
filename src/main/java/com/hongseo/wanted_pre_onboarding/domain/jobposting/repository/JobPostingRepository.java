@@ -21,5 +21,8 @@ public interface JobPostingRepository extends JpaRepository<JobPosting, Long> {
             "ORDER BY jp.createdAt DESC")
     List<JobPosting> findByKeyword(@Param("keyword") String keyword);
 
+    @Query("SELECT jp.jobPostingId FROM JobPosting jp WHERE jp.company.companyId = :companyId AND jp.jobPostingId <> :jobPostingId")
+    List<Long> findAllJobPostingIdsByCompanyId(@Param("companyId") Long companyId, @Param("jobPostingId") Long jobPostingId);
+
 
 }

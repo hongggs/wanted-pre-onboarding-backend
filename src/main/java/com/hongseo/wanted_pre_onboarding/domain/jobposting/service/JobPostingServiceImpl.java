@@ -5,6 +5,7 @@ import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
+import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadDetailResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.error.exception.JobPostingNotFoundException;
@@ -68,5 +69,15 @@ public class JobPostingServiceImpl implements JobPostingService{
         return jobPostingRepository.findByKeyword(keyword).stream()
                 .map(JobPostingAndDtoAdapter::entityToReadDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public JobPostingReadDetailResponseDto getJobPostingDetail(Long jobPostingId) {
+        JobPosting jobPosting = jobPostingRepository.findById(jobPostingId)
+                .orElseThrow(JobPostingNotFoundException::new);
+        List<Long> otherJobPostings = jobPostingRepository.findAllJobPostingIdsByCompanyId(jobPosting.getCompany().getCompanyId(), jobPostingId);
+
+        return JobPostingAndDtoAdapter.entityToReadDetailDto(otherJobPostings, jobPosting);
     }
 }
