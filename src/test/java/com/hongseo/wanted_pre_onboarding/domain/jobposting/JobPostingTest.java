@@ -3,6 +3,7 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.hongseo.wanted_pre_onboarding.domain.jobapplication.dto.request.JobApplicationRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadDetailResponseDto;
@@ -57,7 +58,7 @@ public class JobPostingTest {
     @Order(1)
     @DisplayName("채용 공고 2개 정상 등록")
     void createJobPosting() throws Exception {
-        //Given - 채용공고 2개 생성
+        //Given - 채용공고 dto 2개 생성
         JobPostingCreateRequestDto dto1 = new JobPostingCreateRequestDto(1L, "백엔드 개발자", 1000000, "성실한 백엔드 개발자를 뽑습니다.", "Java, Spring Boot");
         JobPostingCreateRequestDto dto2 = new JobPostingCreateRequestDto(1L, "프론트엔드 개발자", 2000000, "성실한 프론트엔드 개발자를 뽑습니다.", "React.js");
 
@@ -113,9 +114,39 @@ public class JobPostingTest {
 
     @Test
     @Order(4)
+    @DisplayName("등록한 채용 공고 정상 지원")
+    void apply() throws Exception {
+        // Given - 미리 삽입해둔 사용자 아이디 1과 위에서 저장한 채용공고 아이디를 활용해서 공고 지원 dto 생성
+        JobApplicationRequestDto dto = new JobApplicationRequestDto(1L, 1L);
+
+        // When - JobApplication 데이터 저장
+        // Then - 정상 저장 상태 코드 확인
+        mockMvc.perform(post("/api/job-application")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(dto)))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("등록한 채용 공고 중복 지원 시 오류 발생")
+    void apply_dup() throws Exception {
+        // Given - 미리 삽입해둔 사용자 아이디 1과 위에서 저장한 채용공고 아이디를 활용해서 공고 지원 dto 생성
+        JobApplicationRequestDto dto = new JobApplicationRequestDto(1L, 1L);
+
+        // When - JobApplication 데이터 저장
+        // Then - 이미 저장된 기록이 있으므로 정상 저장되지 않음
+        mockMvc.perform(post("/api/job-application")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(dto)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @Order(6)
     @DisplayName("등록한 채용 공고 정상 수정")
     void updateJobPosting() throws Exception {
-        //Given - 수정할 데이터 생성
+        //Given - 수정할 dto 생성
         JobPostingUpdateRequestDto requestDto = new JobPostingUpdateRequestDto("백엔드 개발자", 2000000, "성실한 백엔드 개발자 뽑습니다.", "Kotlin, Spring");
 
         //When - 해당 데이터 수정
@@ -130,14 +161,14 @@ public class JobPostingTest {
     }
 
     @Test
-    @Order(5)
+    @Order(7)
     @DisplayName("등록한 채용 공고 정상 삭제")
     void deleteJobPosting() throws Exception {
-        //Given - 저장된 데이터 존재
-        //When - 해당 데이터 삭제
+        // Given - 저장된 데이터 존재
+        // When - 해당 데이터 삭제
         performDeleteRequest(BASE_URL + "/" + savedJobPostingId);
 
-        //Then - 해당 아이디로 데이터 찾을 경우 찾을 수 없음
+        // Then - 해당 아이디로 데이터 찾을 경우 찾을 수 없음
          mockMvc.perform(get(BASE_URL + "/" + savedJobPostingId))
                 .andExpect(status().isBadRequest());
     }
