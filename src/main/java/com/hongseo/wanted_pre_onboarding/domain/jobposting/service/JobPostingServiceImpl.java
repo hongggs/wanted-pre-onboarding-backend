@@ -16,22 +16,20 @@ import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.adapter.JobPost
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.repository.JobPostingRepository;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 채용공고 관련 서비스를 제공하는 클래스
  */
+@AllArgsConstructor
 @Service
 public class JobPostingServiceImpl implements JobPostingService{
 
-    @Autowired
-    private JobPostingRepository jobPostingRepository;
-    @Autowired
-    private CompanyRepository companyRepository;
-    @Autowired
-    private JobApplicationRepository jobApplicationRepository;
+    private final JobPostingRepository jobPostingRepository;
+    private final CompanyRepository companyRepository;
+    private final JobApplicationRepository jobApplicationRepository;
 
     /**
      * 새로운 채용공고 생성

@@ -6,8 +6,7 @@ import com.hongseo.wanted_pre_onboarding.domain.company.error.exception.CompanyN
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.adapter.CompanyAndDtoAdapter;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
-import com.hongseo.wanted_pre_onboarding.global.error.errorcode.CommonErrorCode;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
  * 회사 관련 서비스를 제공하는 클래스
  */
 @Service
+@AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
 
-    @Autowired
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     /**
      * 새로운 회사를 생성

@@ -10,22 +10,20 @@ import com.hongseo.wanted_pre_onboarding.domain.jobposting.repository.JobPosting
 import com.hongseo.wanted_pre_onboarding.domain.user.error.exception.UserNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.user.model.User;
 import com.hongseo.wanted_pre_onboarding.domain.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 지원 관련 서비스를 제공하는 클래스
  */
+@AllArgsConstructor
 @Service
 public class JobApplicationServiceImpl implements JobApplicationService {
 
-    @Autowired
-    private JobApplicationRepository jobApplicationRepository;
-    @Autowired
-    private JobPostingRepository jobPostingRepository;
-    @Autowired
-    private UserRepository userRepository;
+    private final JobApplicationRepository jobApplicationRepository;
+    private final JobPostingRepository jobPostingRepository;
+    private final UserRepository userRepository;
 
     /**
      * 사용자의 채용 지원 요청을 받아 처리

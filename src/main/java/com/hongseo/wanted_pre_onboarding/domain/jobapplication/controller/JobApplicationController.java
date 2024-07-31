@@ -2,7 +2,7 @@ package com.hongseo.wanted_pre_onboarding.domain.jobapplication.controller;
 
 import com.hongseo.wanted_pre_onboarding.domain.jobapplication.dto.request.JobApplicationRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobapplication.service.JobApplicationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
  * 지원 관련 HTTP 요청 처리하는 컨트롤러
  * 각 메소드는 RESTful API를 통해 기능을 제공
  */
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/job-application")
 public class JobApplicationController {
 
-    @Autowired
-    private JobApplicationService jobApplicationService;
+    private final JobApplicationService jobApplicationService;
 
     /**
      * 사용자의 채용 지원 요청을 받아 처리
