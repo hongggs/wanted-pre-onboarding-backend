@@ -11,7 +11,10 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-@Slf4j
+/**
+ * 더미 데이터 추가
+ * User와 Company 미리 추가 후 테스팅 진행
+ */
 @Component
 public class DataInitializer {
 

@@ -14,6 +14,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 지원 엔티티 클래스
+ */
 @Entity
 @Getter
 @NoArgsConstructor
@@ -26,9 +29,9 @@ public class JobApplication {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "job_posting_id", nullable = false)
-    private JobPosting jobPosting;
+    private JobPosting jobPosting; // 지원 회사
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User user; // 지원자
 }

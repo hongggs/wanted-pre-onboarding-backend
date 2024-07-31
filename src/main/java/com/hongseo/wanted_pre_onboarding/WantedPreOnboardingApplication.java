@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableJpaAuditing
+@EnableJpaAuditing //BaseTimeEntity를 자동으로 관리
 public class WantedPreOnboardingApplication {
 
 	public static void main(String[] args) {

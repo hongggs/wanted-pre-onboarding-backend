@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 채용공고 수정 응답 DTO
+ */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

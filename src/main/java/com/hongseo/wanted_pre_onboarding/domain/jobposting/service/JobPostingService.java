@@ -7,9 +7,12 @@ import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPosti
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingUpdateResponseDto;
 import java.util.List;
 
+/**
+ * 채용공고 관련 비즈니스 로직을 정의하는 서비스 인터페이스
+ */
 public interface JobPostingService {
     public Long createJobPosting(JobPostingCreateRequestDto jobPostingDto);
-    public JobPostingUpdateResponseDto updateJobPosting(Long id, JobPostingUpdateRequestDto jobPostingDto);
+    public JobPostingUpdateResponseDto updateJobPosting(Long jobPostingId, JobPostingUpdateRequestDto jobPostingDto);
 
     public void deleteJobPosting(Long jobPostingId);
     public List<JobPostingReadResponseDto> getAllJobPostings();

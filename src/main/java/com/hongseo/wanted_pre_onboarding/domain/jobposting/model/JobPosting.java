@@ -21,6 +21,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 지원공고 엔티티 클래스
+ */
 @Entity
 @Getter
 @NoArgsConstructor
@@ -29,15 +32,15 @@ import lombok.NoArgsConstructor;
 public class JobPosting extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long jobPostingId;
+    private Long jobPostingId; // 채용공고 id
     @NotNull
-    private String position;
+    private String position; // 채용 포지션
     @NotNull
-    private Integer reward;
+    private Integer reward; // 채용 보상금
     @NotNull
-    private String description;
+    private String description; // 채용 내용
     @NotNull
-    private String skill;
+    private String skill; // 사용 기술
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "companyId")
     private Company company;

@@ -4,6 +4,9 @@ import com.hongseo.wanted_pre_onboarding.domain.company.dto.request.CompanyReque
 import com.hongseo.wanted_pre_onboarding.domain.company.dto.response.CompanyResponseDto;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 
+/**
+ * Company 엔티티와 관련 DTO 간의 데이터 변환을 처리하는 어댑터 클래스
+ */
 public class CompanyAndDtoAdapter {
     public static Company dtoToEntity(CompanyRequestDto companyDto) {
         return Company.builder()

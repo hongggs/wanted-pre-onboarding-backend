@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+/**
+ * 지원 관련 에러코드 정의
+ */
 @Getter
 @RequiredArgsConstructor
 public enum JobApplicationErrorCode implements ErrorCode {

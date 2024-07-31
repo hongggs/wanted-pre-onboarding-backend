@@ -9,9 +9,12 @@ import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPosti
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.model.JobPosting;
 import java.util.List;
 
+/**
+ * JobPosting 엔티티와 관련 DTOs 간의 데이터 변환을 처리하는 어댑터 클래스
+ */
 public class JobPostingAndDtoAdapter {
 
-    public static JobPosting dtoToEntity(Company company, JobPostingCreateRequestDto jobPostingDto) {
+    public static JobPosting createDtoToEntity(Company company, JobPostingCreateRequestDto jobPostingDto) {
         return JobPosting.builder()
                 .company(company)
                 .position(jobPostingDto.getPosition())

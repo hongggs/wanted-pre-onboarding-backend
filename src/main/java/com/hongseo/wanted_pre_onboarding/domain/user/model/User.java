@@ -11,6 +11,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 사용자 엔티티 클래스
+ */
 @Entity
 @Getter
 @NoArgsConstructor

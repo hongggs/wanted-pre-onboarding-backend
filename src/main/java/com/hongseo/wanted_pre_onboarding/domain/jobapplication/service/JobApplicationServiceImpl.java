@@ -14,22 +14,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 지원 관련 서비스를 제공하는 클래스
+ */
 @Service
 public class JobApplicationServiceImpl implements JobApplicationService {
-    private final JobApplicationRepository jobApplicationRepository;
-    private final JobPostingRepository jobPostingRepository;
-    private final UserRepository userRepository;
 
     @Autowired
-    public JobApplicationServiceImpl(JobApplicationRepository jobApplicationRepository,
-                                 JobPostingRepository jobPostingRepository,
-                                 UserRepository userRepository) {
-        this.jobApplicationRepository = jobApplicationRepository;
-        this.jobPostingRepository = jobPostingRepository;
-        this.userRepository = userRepository;
-    }
+    private JobApplicationRepository jobApplicationRepository;
+    @Autowired
+    private JobPostingRepository jobPostingRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-
+    /**
+     * 사용자의 채용 지원 요청을 받아 처리
+     * @param jobApplicationDto jobApplicationDto 채용 지원에 필요한 정보를 담은 DTO
+     * @return 생성된 지원의 Id
+     */
     @Override
     @Transactional
     public Long apply(JobApplicationRequestDto jobApplicationDto) {

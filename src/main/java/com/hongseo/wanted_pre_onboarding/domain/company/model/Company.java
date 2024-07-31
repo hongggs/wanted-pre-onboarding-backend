@@ -11,6 +11,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 회사 엔티티 클래스
+ */
 @Entity
 @Getter
 @NoArgsConstructor
@@ -19,11 +22,11 @@ import lombok.NoArgsConstructor;
 public class Company extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long companyId;
+    private Long companyId; //회사 id
     @NotNull
-    private String companyName;
+    private String companyName; // 회사명
     @NotNull
-    private String country;
+    private String country; // 국가
     @NotNull
-    private String region;
+    private String region; // 지역
 }

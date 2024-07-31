@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+/**
+ * 채용공고 읽기 응답 DTO
+ */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
