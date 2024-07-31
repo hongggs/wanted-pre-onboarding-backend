@@ -3,6 +3,8 @@ package com.hongseo.wanted_pre_onboarding.domain.jobposting.service;
 import com.hongseo.wanted_pre_onboarding.domain.company.error.exception.CompanyNotFoundException;
 import com.hongseo.wanted_pre_onboarding.domain.company.model.Company;
 import com.hongseo.wanted_pre_onboarding.domain.company.repository.CompanyRepository;
+import com.hongseo.wanted_pre_onboarding.domain.jobapplication.model.JobApplication;
+import com.hongseo.wanted_pre_onboarding.domain.jobapplication.repository.JobApplicationRepository;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingCreateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.request.JobPostingUpdateRequestDto;
 import com.hongseo.wanted_pre_onboarding.domain.jobposting.dto.response.JobPostingReadDetailResponseDto;
@@ -25,6 +27,8 @@ public class JobPostingServiceImpl implements JobPostingService{
     private JobPostingRepository jobPostingRepository;
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private JobApplicationRepository jobApplicationRepository;
     @Override
     @Transactional
     public Long createJobPosting(JobPostingCreateRequestDto jobPostingDto) {
@@ -52,6 +56,11 @@ public class JobPostingServiceImpl implements JobPostingService{
     public void deleteJobPosting(Long jobPostingId) {
         JobPosting jobPosting = jobPostingRepository.findById(jobPostingId)
                 .orElseThrow(JobPostingNotFoundException::new);
+
+        // 해당 JobPosting 참조하는 JobApplication들을 삭제
+        List<JobApplication> applications = jobApplicationRepository.findByJobPosting(jobPosting);
+        jobApplicationRepository.deleteAll(applications);
+
         jobPostingRepository.deleteById(jobPostingId);
     }
 
